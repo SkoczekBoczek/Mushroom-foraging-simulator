@@ -6,6 +6,7 @@ public class Game {
 
     public void startGame() {
         System.out.println("Player: " + player.name + " stated a game");
+        forest.displayForest();
     }
 
     public void checkWin() {
