@@ -12,6 +12,14 @@ public class Forest {
     private Player player;
     private Random random = new Random();
 
+    public int getHeight(){
+        return grid.length;
+    }
+
+    public int getWidth(){
+        return grid[0].length;
+    }
+
     public Forest(int width, int height, Player player){
         this.grid = new Mushroom[width][height];
         this.player = player;
@@ -53,4 +61,3 @@ public class Forest {
         }
     }
 }
-

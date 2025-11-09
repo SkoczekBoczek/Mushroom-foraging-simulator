@@ -19,10 +19,16 @@ public class Player {
         this.positionY = 0;
     }
 
-    public void move(int deltaX, int deltaY) {
-        this.positionX += deltaX;
-        this.positionY += deltaY;
-        System.out.println(name + " moved to position (" + positionX + ", " + positionY + ")");
+    public void move(int deltaX, int deltaY, int height, int width){
+        int newX = this.positionX + deltaX;
+        int newY = this.positionY + deltaY;
+        if(newX >= 0 && newX < height && newY >= 0 && newY < width){
+            this.positionX = newX;
+            this.positionY = newY;
+            System.out.println(name + " moved to (" + positionX + ", " + positionY + ")");
+        } else {
+            System.out.println("Move out of bounds! Current position: (" + positionX + ", " + positionY + ")");
+        }
     }
     
     public void pickMushroom(Mushroom mushroom){
