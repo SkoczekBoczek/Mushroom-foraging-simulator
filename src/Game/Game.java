@@ -49,6 +49,12 @@ public class Game {
                 System.out.println("Invalid command.");
                 break;
             }
+
+            if(forest.getMushroom(player.positionX, player.positionY) != null ){
+                player.pickMushroom(forest.getMushroom(player.positionX, player.positionY));
+                forest.removeMushroom(player.positionX, player.positionY);
+                player.getScore();
+            }
             
         }
         scanner.close();

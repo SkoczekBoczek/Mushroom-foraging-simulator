@@ -60,4 +60,19 @@ public class Forest {
             System.out.println();
         }
     }
+
+    public Mushroom getMushroom(int x, int y){
+        if(x >= 0 && x <= grid.length && y >=0 && x <= grid.length){
+            return grid[x][y];
+        }
+        return null;
+    }
+    
+    public void removeMushroom(int x, int y){
+        if(x >= 0 && x <= grid.length && y >=0 && x <= grid.length){
+            grid[x][y] = null;
+        }
+
+    }
+
 }
