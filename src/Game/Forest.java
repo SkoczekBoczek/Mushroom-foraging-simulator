@@ -29,11 +29,32 @@ public class Forest {
     public void placeMushroom(){
         for (int i = 0; i < grid.length; i++) {
             for (int j = 0; j < grid[i].length; j++) {
+                if(player.positionX == i && player.positionY == j){
+                    continue;
+                }
                 if (random.nextInt(10) < 1) {
-                    grid[i][j] = generateRandomMushroom();
+                    if(!hasAdjacentMushroom(i, j)){
+                        grid[i][j] = generateRandomMushroom();
+                    }
                 }
             }
         }
+    }
+
+    public boolean hasAdjacentMushroom(int x, int y){
+        for(int dx=-1; dx <= 1; dx++){
+            for(int dy=-1; dy <= 1; dy++){
+                if(dx == 0 && dy == 0) continue;
+                int nx = x-dx;
+                int ny = y-dy;
+                if(nx > 0 && nx < grid.length && ny > 0 && ny < grid[0].length){
+                    if( grid[nx][ny] != null){
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
     }
 
     public Mushroom generateRandomMushroom(){
@@ -62,14 +83,14 @@ public class Forest {
     }
 
     public Mushroom getMushroom(int x, int y){
-        if(x >= 0 && x <= grid.length && y >=0 && x <= grid.length){
+        if (x >= 0 && x < grid.length && y >= 0 && y < grid[0].length) {
             return grid[x][y];
         }
         return null;
     }
     
     public void removeMushroom(int x, int y){
-        if(x >= 0 && x <= grid.length && y >=0 && x <= grid.length){
+        if (x >= 0 && x < grid.length && y >= 0 && y < grid[0].length) {
             grid[x][y] = null;
         }
 

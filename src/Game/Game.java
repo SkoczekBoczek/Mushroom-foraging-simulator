@@ -30,16 +30,16 @@ public class Game {
 
             switch(command) {
             case "w":
-                player.move(-1, 0, height, width);
+                handleMove(-1, 0, height, width, scanner);
                 break;
-            case "a":
-                player.move(0, -1, height, width);
+                case "a":
+                handleMove(0, -1, height, width, scanner);
                 break;
-            case "s":
-                player.move(1, 0, height, width);
+                case "s":
+                handleMove(1, 0, height, width, scanner);
                 break;
-            case "d":
-                player.move(0, 1, height, width);
+                case "d":
+                handleMove(0, 1, height, width, scanner);
                 break;
             case "q":
                 isRunning = false;
@@ -58,6 +58,34 @@ public class Game {
             
         }
         scanner.close();
+    }
+
+    public void handleMove(int deltaX, int deltaY, int height, int width, java.util.Scanner scanner){
+        int targetX = player.positionX + deltaX;
+        int targetY = player.positionY + deltaY;
+
+        if(targetX < 0 || targetX >= height || targetY < 0 || targetY >= width){
+            System.out.println("Move out of bounds!");
+            return;
+        }
+        
+        mushrooms.Mushroom target = forest.getMushroom(targetX, targetY);
+        if(target != null){
+            System.out.println("There is a mushroom: " + target.getName());
+            System.out.print("Pick it up? (y/n): ");
+            String ans = scanner.nextLine().trim().toLowerCase();
+            if(ans.equals("yes") || ans.equals("y")){
+                player.move(deltaX, deltaY, height, width);
+                player.pickMushroom(target);
+                forest.removeMushroom(targetX, targetY);
+                player.getScore();
+            }else{
+                System.out.println("You decided not to pick it up. Staying at (" + player.positionX + "," + player.positionY + ").");
+                return;
+            }
+        }else{
+            player.move(deltaX, deltaY, height, width);
+        }
     }
 
     public void checkWin() {

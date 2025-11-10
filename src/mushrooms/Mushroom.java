@@ -22,4 +22,9 @@ public class Mushroom {
     public void consume(Player player){
         System.out.println("You consumed the " + name + " mushroom and gained " + points + " points.");
     }
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }
