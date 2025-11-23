@@ -11,6 +11,7 @@ public class Game {
         System.out.println("a - move left");
         System.out.println("s - move down");
         System.out.println("d - move right");
+        System.out.println("f - finish mushroom collection");
         System.out.println("q - quit");
 
         playGame();
@@ -45,6 +46,9 @@ public class Game {
                 isRunning = false;
                 System.out.println("Quitting game...");
                 break;
+            case "f":
+                finishGame();
+                break;
             default:
                 System.out.println("Invalid command.");
                 break;
@@ -54,6 +58,7 @@ public class Game {
                 player.pickMushroom(forest.getMushroom(player.positionX, player.positionY));
                 forest.removeMushroom(player.positionX, player.positionY);
                 player.getScore();
+                checkWin();
             }
             
         }
@@ -79,6 +84,7 @@ public class Game {
                 player.pickMushroom(target);
                 forest.removeMushroom(targetX, targetY);
                 player.getScore();
+                    checkWin();
             }else{
                 System.out.println("You decided not to pick it up. Staying at (" + player.positionX + "," + player.positionY + ").");
                 return;
@@ -88,7 +94,20 @@ public class Game {
         }
     }
 
-    public void checkWin() {
-        System.out.println("Checking win conditions...");
+    public boolean checkWin() {
+        if(!forest.hasAnyMushrooms()){
+            System.out.println("");
+            System.out.println("You collected all mushrooms. Game over!");
+            System.out.println("Final score: " + player.score);
+            isRunning = false;
+            return true;    
+        }
+        return false;
     }
+    
+    public void finishGame() {
+        isRunning = false;
+        System.out.println("");
+        System.out.println("Game finished by player. Final score: " + player.score);
+    }  
 }

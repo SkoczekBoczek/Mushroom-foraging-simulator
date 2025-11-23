@@ -25,6 +25,7 @@ public class Player {
         if(newX >= 0 && newX < height && newY >= 0 && newY < width){
             this.positionX = newX;
             this.positionY = newY;
+            System.out.println("");
             System.out.println(name + " moved to (" + positionX + ", " + positionY + ")");
         } else {
             System.out.println("Move out of bounds! Current position: (" + positionX + ", " + positionY + ")");

@@ -41,14 +41,14 @@ public class Forest {
         }
     }
 
-    public boolean hasAdjacentMushroom(int x, int y){
-        for(int dx=-1; dx <= 1; dx++){
-            for(int dy=-1; dy <= 1; dy++){
-                if(dx == 0 && dy == 0) continue;
-                int nx = x-dx;
-                int ny = y-dy;
-                if(nx > 0 && nx < grid.length && ny > 0 && ny < grid[0].length){
-                    if( grid[nx][ny] != null){
+    private boolean hasAdjacentMushroom(int x, int y) {
+        for (int dx = -1; dx <= 1; dx++) {
+            for (int dy = -1; dy <= 1; dy++) {
+                if (dx == 0 && dy == 0) continue;
+                int nx = x + dx;
+                int ny = y + dy;
+                if (nx >= 0 && nx < grid.length && ny >= 0 && ny < grid[0].length) {
+                    if (grid[nx][ny] != null) {
                         return true;
                     }
                 }
@@ -82,6 +82,17 @@ public class Forest {
         }
     }
 
+    public boolean hasAnyMushrooms(){
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid[i].length; j++) {
+                if(grid[i][j] != null){
+                    return true;
+                }
+            }
+        }  
+        return false;
+    }
+
     public Mushroom getMushroom(int x, int y){
         if (x >= 0 && x < grid.length && y >= 0 && y < grid[0].length) {
             return grid[x][y];
@@ -95,5 +106,4 @@ public class Forest {
         }
 
     }
-
 }
