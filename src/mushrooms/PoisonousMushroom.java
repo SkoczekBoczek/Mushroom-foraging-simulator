@@ -8,6 +8,7 @@ public class PoisonousMushroom extends Mushroom {
     }
 
     public void consume(Player player){
+        super.consume(player);
         player.score += this.points;
         }
 

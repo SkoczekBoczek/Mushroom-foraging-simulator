@@ -2,7 +2,7 @@ package mushrooms;
 
 import Game.Player;
 
-public class Mushroom {
+public abstract class Mushroom {
     protected String name;
     protected int points;
 

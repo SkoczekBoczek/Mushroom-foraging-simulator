@@ -44,6 +44,7 @@ public class Game {
                 break;
             case "q":
                 isRunning = false;
+                System.out.println("Your score: " + player.score);
                 System.out.println("Quitting game...");
                 break;
             case "f":
@@ -52,15 +53,7 @@ public class Game {
             default:
                 System.out.println("Invalid command.");
                 break;
-            }
-
-            if(forest.getMushroom(player.positionX, player.positionY) != null ){
-                player.pickMushroom(forest.getMushroom(player.positionX, player.positionY));
-                forest.removeMushroom(player.positionX, player.positionY);
-                player.getScore();
-                checkWin();
-            }
-            
+            }   
         }
         scanner.close();
     }
