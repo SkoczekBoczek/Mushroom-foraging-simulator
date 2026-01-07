@@ -1,9 +1,6 @@
 package Game;
 
-import mushrooms.EdibleMushroom;
-import mushrooms.MedicinalMushroom;
 import mushrooms.Mushroom;
-import mushrooms.PoisonousMushroom;
 import java.util.Random;
 
 
@@ -11,6 +8,7 @@ public class Forest {
     private Mushroom[][] grid;
     private Player player;
     private Random random = new Random();
+    private ForestGenerationStrategy strategy;
 
     public int getHeight(){
         return grid.length;
@@ -21,8 +19,13 @@ public class Forest {
     }
 
     public Forest(int width, int height, Player player){
+        this(width, height, player, new StandardForestStrategy());
+    }
+
+    public Forest(int width, int height, Player player, ForestGenerationStrategy strategy){
         this.grid = new Mushroom[width][height];
         this.player = player;
+        this.strategy = strategy;
         placeMushroom();
     }
 
@@ -32,10 +35,10 @@ public class Forest {
                 if(player.positionX == i && player.positionY == j){
                     continue;
                 }
-                if (random.nextInt(10) < 1) {
-                    if(!hasAdjacentMushroom(i, j)){
-                        grid[i][j] = generateRandomMushroom();
-                    }
+                
+                Mushroom newMushroom = strategy.createMushroom(random);
+                if (newMushroom != null && !hasAdjacentMushroom(i, j)) {
+                    grid[i][j] = newMushroom;
                 }
             }
         }
@@ -55,16 +58,6 @@ public class Forest {
             }
         }
         return false;
-    }
-
-    public Mushroom generateRandomMushroom(){
-        int type = random.nextInt(3);
-        switch (type) {
-            case 0: return new EdibleMushroom("Borowik", 10);
-            case 1: return new PoisonousMushroom("Muchomor", -10);
-            case 2: return new MedicinalMushroom("Lakówka", 5);
-            default: return null;
-        }
     }
 
     public void displayForest(){
