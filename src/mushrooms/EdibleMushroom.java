@@ -9,7 +9,7 @@ public class EdibleMushroom extends Mushroom {
 
     public void consume(Player player){
         super.consume(player);
-        player.score += this.points;
+        player.addScore(this.points);
         }
 
 }

@@ -32,7 +32,7 @@ public class Forest {
     public void placeMushroom(){
         for (int i = 0; i < grid.length; i++) {
             for (int j = 0; j < grid[i].length; j++) {
-                if(player.positionX == i && player.positionY == j){
+                if(player.getPositionX() == i && player.getPositionY() == j){
                     continue;
                 }
                 
@@ -63,7 +63,7 @@ public class Forest {
     public void displayForest(){
         for (int i = 0; i < grid.length; i++) {
             for (int j = 0; j < grid[i].length; j++) {
-                if(player.positionX == i && player.positionY == j){
+                if(player.getPositionX() == i && player.getPositionY() == j){
                     System.out.print(" P ");
                 } else if(grid[i][j] != null){
                     System.out.print(" M ");
@@ -97,6 +97,5 @@ public class Forest {
         if (x >= 0 && x < grid.length && y >= 0 && y < grid[0].length) {
             grid[x][y] = null;
         }
-
     }
 }

@@ -3,20 +3,41 @@ package Game;
 import mushrooms.Mushroom;
 
 import java.util.List;
+import java.util.ArrayList;
 
 public class Player {
-    public String name;
-    public List <Mushroom> collectedMushrooms;
-    public int score;
-    public int positionX;
-    public int positionY;
+    private String name;
+    private List <Mushroom> collectedMushrooms;
+    private int score;
+    private int positionX;
+    private int positionY;
 
     public Player() {
         this.name = "Forager";
-        this.collectedMushrooms = new java.util.ArrayList<>();
+        this.collectedMushrooms = new ArrayList<>();
         this.score = 0;
         this.positionX = 0;
         this.positionY = 0;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void addScore(int points) {
+        this.score += points;
+    }
+
+    public int getPositionX() {
+        return positionX;
+    }
+
+    public int getPositionY() {
+        return positionY;
     }
 
     public void move(int deltaX, int deltaY, int height, int width){
@@ -39,7 +60,7 @@ public class Player {
 
     }
 
-    public void getScore() {
+    public void displayScore() {
         System.out.println(name + "'s current score: " + score);
     }
 

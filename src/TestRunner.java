@@ -1,6 +1,8 @@
+
 import Game.ForestGenerationStrategy;
 import Game.StandardForestStrategy;
 import Game.HardcoreForestStrategy;
+import Game.Player;
 import mushrooms.Mushroom;
 import mushrooms.PoisonousMushroom;
 import java.util.Random;
@@ -9,6 +11,7 @@ public class TestRunner {
     public static void main(String[] args) {
         testStandardStrategy();
         testHardcoreStrategy();
+        testPlayerLogic();
     }
 
     private static void testStandardStrategy() {
@@ -32,6 +35,7 @@ public class TestRunner {
         } else {
             System.out.println("FAILED");
             System.out.println("Częstotliwość grzybów: " + mushroomCount + ", oczekiwano ok. 1000");
+            System.out.println("");
         }
     }
 
@@ -61,10 +65,42 @@ public class TestRunner {
             System.out.println("PASSED");
             System.out.println("Częstotliwość grzybów: " + mushroomCount + "/" + iterations);
             System.out.println("Ilość trujących grzybów: " + poisonousCount);
+            System.out.println("");
         } else {
             System.out.println("FAILED");
             System.out.println("Częstotliwość grzybów: " + mushroomCount);
             System.out.println("Ilość trujących grzybów: " + poisonousCount + " trujących)");
+            System.out.println("");
         }
+    }
+
+    private static void testPlayerLogic() {
+        System.out.print("Test 3: Player Logic: ");
+        Player player = new Player();
+        
+        if (player.getScore() != 0 || player.getPositionX() != 0 || player.getPositionY() != 0) {
+            System.out.println("FAILED: Błąd pozycji początkowej");
+            return;
+        }
+
+        player.move(1, 1, 10, 10);
+        if (player.getPositionX() != 1 || player.getPositionY() != 1) {
+            System.out.println("FAILED: Błąd ruchu");
+            return;
+        }
+
+        player.move(-5, 0, 10, 10); 
+        if (player.getPositionX() != 1) {
+            System.out.println("FAILED: Błąd granicy mapy");
+            return;
+        }
+
+        player.addScore(10);
+        if (player.getScore() != 10) {
+            System.out.println("FAILED: Błąd dodawania punktów");
+            return;
+        }
+
+        System.out.println("PASSED");
     }
 }

@@ -16,7 +16,14 @@ public class Main {
         System.out.println("2. Hardcore");
 
         System.out.print("Enter your choice: ");
-        int choice = scanner.nextInt();
+        int choice = 1;
+        try {
+            choice = scanner.nextInt();
+        } catch (java.util.InputMismatchException e) {
+            System.out.println("Invalid input, defaulting to Normal.");
+            scanner.next();
+        }
+
         ForestGenerationStrategy strategy;
 
         if (choice == 2) {
@@ -25,9 +32,7 @@ public class Main {
             strategy = new StandardForestStrategy();
         }
 
-        Game game = new Game();
-        game.player = new Player();
-        game.forest = new Forest(10, 10, game.player, strategy);
+        Game game = new Game(10, 10, strategy);
 
         game.startGame();
     }
