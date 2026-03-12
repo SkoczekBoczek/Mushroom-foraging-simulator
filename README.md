@@ -1,39 +1,54 @@
-# Projekt Programowanie Obiektowe – Java
+# Mushroom Foraging Simulator
 
-## Opis projektu
+Projekt zrealizowany w ramach kursu **Programowanie Obiektowe**. Jest to prosta, tekstowa gra konsolowa, w której gracz wciela się w rolę zbieracza grzybów. Celem gry jest eksploracja lasu, zbieranie grzybów i zdobywanie punktów.
 
-Ten projekt jest częścią kursu **Programowanie Obiektowe**. Celem jest zaprojektowanie i zaimplementowanie w pełni funkcjonalnej aplikacji w języku C++ albo Java z wykorzystaniem zasad programowania obiektowego (OOP).
+## Funkcjonalności
 
-### Technologie
+- **Eksploracja Lasu**: Poruszaj się po dwuwymiarowej mapie reprezentującej las.
+- **Zbieranie Grzybów**: Znajduj i zbieraj grzyby, które pojawiają się losowo na mapie.
+- **Różne Typy Grzybów**: W lesie można znaleźć trzy rodzaje grzybów:
+  - **Jadalne** (`EdibleMushroom`): Dodają punkty.
+  - **Trujące** (`PoisonousMushroom`): Odejmują punkty.
+  - **Lecznicze** (`MedicinalMushroom`): Dają bonus punktowy.
+- **Poziomy Trudności**: Wybierz jeden z dwóch trybów gry, które zmieniają częstotliwość i rodzaj pojawiających się grzybów.
+- **System Punktacji**: Każdy zebrany grzyb wpływa na końcowy wynik gracza.
 
-- Język programowania: Java
-- Wersja JDK: 11 lub wyższa
-- IDE: Dowolne (IntelliJ IDEA, Eclipse, NetBeans)
+## Zastosowane Technologie
 
-### Milestones
+- **Język**: Java
+- **Wersja JDK**: 11 lub wyższa
 
-#### 1. Milestone 1 – Analiza obiektowa, wstępny projekt i diagramy klas
+## Architektura i Wzorce Projektowe
 
-W tym etapie skupiamy się na analizie wymagań oraz na przygotowaniu projektu aplikacji w kontekście programowania obiektowego.
+Projekt został zbudowany w oparciu o kluczowe zasady programowania obiektowego.
 
-- Przeprowadzenie analizy obiektowej wymagań projektu.
-- Stworzenie wstępnego projektu systemu.
-- Zbudowanie diagramów klas UML, które przedstawią relacje między głównymi klasami w systemie.
+### Zasady OOP
 
-#### 2. Milestone 2: Podstawowa funkcjonalność z zasadami obiektowymi
+- **Dziedziczenie**: Abstrakcyjna klasa `Mushroom` jest klasą bazową dla konkretnych typów grzybów: `EdibleMushroom`, `PoisonousMushroom` i `MedicinalMushroom`.
+- **Polimorfizm**: Metoda `consume(Player player)` jest zdefiniowana w klasie bazowej `Mushroom` i nadpisywana w każdej z podklas. Dlatego w zależności od typu grzyba, wywoływana jest odpowiednia logika wpływająca na punkty gracza.
+- **Enkapsulacja**: Dane kluczowych klas (np. `Player`, `Forest`) są prywatne, a dostęp do nich odbywa się za pomocą publicznych metod.
+- **Agregacja/Kompozycja**:
+  - Klasa `Game` **składa się** z obiektów `Player` i `Forest`.
+  - Klasa `Forest` **zawiera** tablicę obiektów `Mushroom`.
+  - Klasa `Player` **agreguje** listę zebranych grzybów.
 
-Po przygotowaniu wstępnego projektu, należy przystąpić do implementacji podstawowych klas systemu.
+### Wzorce Projektowe
 
-- Implementuj klasy zgodnie z diagramem klas UML.
-- Zdefiniuj atrybuty i metody dla każdej klasy.
-- Zaimplementuj relacje między klasami, takie jak dziedziczenie i agregacja.
-- Zaimplementuj dziedziczenie, aby umożliwić rozszerzanie funkcjonalności klas.
-- Wykorzystaj polimorfizm, aby umożliwić dynamiczne wiązanie metod.
+#### Strategy Pattern
 
-#### 3. Milestone 3: Kompletny system z wzorcami projektowymi i testami jednostkowymi
+Wzorzec ten został użyty do zarządzania logiką generowania lasu.
 
-W tym etapie należy dokończyć projekt poprzez:
+- **StandardForestStrategy (Normal)**: Zapewnia umiarkowaną liczbę grzybów (ok 10% szansy na pole) i równomiernym rozkładem gatunków jadalnych, trujących i leczniczych.
+- **HardcoreForestStrategy (Hardcore)**: Zwiększa zagęszczenie grzybów (ok. 20%), ale zwiększa ryzyko wystąpienia trujących grzybów.
 
-- Zastosowanie wzorców projektowych, takich jak Singleton, Factory, Observer (w zależności od projektu).
-- Wprowadzenie testów jednostkowych (unit tests) w celu zapewnienia poprawności działania aplikacji.
-  Przeprowadzenie końcowej integracji i testowania systemu.
+## Jak Uruchomić
+
+1.  Otwórz terminal lub wiersz poleceń i przejdź do katalogu `src` projektu.
+2.  Skompiluj wszystkie pliki Java:
+    ```bash
+    javac Main.java Game/*.java mushrooms/*.java
+    ```
+3.  Uruchom grę (będąc w katalogu `src`):
+    ```bash
+    java Main
+    ```
